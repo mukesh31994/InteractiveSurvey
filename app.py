@@ -202,6 +202,7 @@ def predict():
     global query_count, questions, mode, responses, form_completed
     type = request.args.get("type")
     question_list = list(questions.values())
+    print(query_count)
     if query_count == -9999:
         form_completed = True
         query_count = -2
