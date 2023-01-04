@@ -98,7 +98,7 @@ def feedback():
             response = make_response(
                 render_template('feedback.html', name=name, questions=questions, type=type))
             res = requests.post(
-                'http://localhost:5000/predict?type='+type)
+                'https://interactive-survey.herokuapp.com/predict?type='+type)
             print("Hit predict for first timer", res.content)
             return response
         else:
@@ -264,7 +264,7 @@ def user():
 
 
 def email_preprocess(form_types, student_mails,
-                     base_url=f"http://127.0.0.1:5000/feedback?"):
+                     base_url=f"https://interactive-survey.herokuapp.com/feedback?"):
 
     email_list = []
     for each_student in student_mails:
