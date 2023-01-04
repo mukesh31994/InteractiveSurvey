@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 400;
+            font-size: 100%;
+            background: #F1F1F1;
+        }
+
+        #htag {
+            position: relative;
+            top: 1em;
+            left: 40%;
+            width: 350px;
+            font-size: 15px;
+            border-radius: 9px;
+            letter-spacing: 6px;
+            background-color: #e7e1e1;
+            border: 7px solid #e7081a;
+            color: #9b3251;
+            text-align: center;
+        }
+
+        /*========feed-block======*/
+        hr {
+            border: none;
+            border-top: 1px dotted #f00;
+            color: #fff;
+            background-color: #fff;
+            height: 1px;
+            width: 50%;
+        }
+
+        #container {
+            position: absolute;
+            top: 2%;
+            left: 7%;
+            width: 82em;
+            height: 44em;
+            border: 0px solid #ccc;
+            border-radius: 5px;
+            background-color: #fcbfbf;
+            align-items: center;
+            margin: auto;
+        }
+
+        #feed-std {
+            position: absolute;
+            top: 10%;
+            left: 13%;
+            width: 28em;
+            height: 30em;
+            margin-top: -5em;
+            margin-left: -10em;
+            padding: top 100px;
+            border: 0px solid #ccc;
+            border-radius: 5px;
+            background-color: #e7e1e1;
+            align-items: center;
+            text-align: left 20px;
+            margin: auto;
+            overflow-y: scroll;
+        }
+
+        #feed-std:hover {
+            height: 30em;
+            border-radius: 9px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        #feed-type {
+            position: absolute;
+            top: 10%;
+            left: 56%;
+            width: 28em;
+            height: 30em;
+            margin-top: -5em;
+            margin-left: -10em;
+            padding: top 100px;
+            border: 0px solid #ccc;
+            border-radius: 5px;
+            background-color: #e7e1e1;
+            align-items: center;
+            text-align: left 20px;
+            margin: auto;
+            overflow-y: scroll;
+        }
+
+        #feed-type:hover {
+            height: 30em;
+            border-radius: 9px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .stds {
+            position: relative;
+            width: 17.3em;
+            height: 2em;
+            border: 5px solid #ccc;
+            border-radius: 5px;
+            color: #100FF6;
+            align-items: center;
+            text-align: left 20px;
+            font-size: 1.5em;
+        }
+
+        #admin-btn {
+            position: absolute;
+            top: 88%;
+            left: 20%;
+            font-size: 20px;
+            letter-spacing: 5px;
+            margin-left: 15em;
+            border: 3px solid #e7081a;
+            background-color: #e7e1e1;
+            border-radius: 8px;
+            width: 155px;
+            height: 65px;
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        #admin-btn:hover {
+            letter-spacing: 5px;
+            font-size: 20px;
+            border: 3px solid #e7081a;
+            background-color: #e7e1e1;
+            width: 155x;
+            height: 65px;
+            box-shadow: 0 12px 25px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        #headers-std {
+            position: absolute;
+            top: 2%;
+            left: 2%;
+            font-size: 20px;
+            margin-left: 7em;
+            border: 3px solid #e7081a;
+            background-color: #e7e1e1;
+            border-radius: 8px;
+            width: 22em;
+            height: 26px;
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+            align-items: center;
+            text-align: center;
+        }
+
+        #headers-type {
+            position: absolute;
+            top: 2%;
+            left: 45%;
+            font-size: 20px;
+            margin-left: 7em;
+            border: 3px solid #e7081a;
+            background-color: #e7e1e1;
+            border-radius: 8px;
+            width: 22em;
+            height: 26px;
+            box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+            align-items: center;
+            text-align: center;
+        }
+
+        input[type='checkbox'] {
+            -webkit-appearance: none;
+            width: 30px;
+            height: 30px;
+            padding: top 20%;
+            background: white;
+            border-radius: 5px;
+            border: 2px solid #555;
+        }
+
+        input[type='checkbox']:checked {
+            background: rgb(30, 223, 39);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="htag">
+        <h2 id="page-title">ADMIN PAGE</h2>
+    </div> -->
+    <div id="container">
+        <form id="admin-selector" action="{{ url_for('admin') }}" method="post">
+            <h3 id="headers-std">Choose Students below</h3>
+            <div id="feed-std">
+                <!-- <hr> -->
+                {% for student_name, student_email in students.items() %}
+                <div class="stds">
+                    <input type="checkbox" id="{{student_email}}" name="dropdown_for_students"
+                        value="{{student_name}}_{{student_email}}">
+                    <label for="dropdown_for_students">{{student_email}}</label><br>
+                </div>
+                {% endfor %}
+            </div>
+
+            <h3 id="headers-type">Choose Form-type below</h3>
+            <div id="feed-type">
+                <!-- <hr> -->
+                {% for form_type in form_types %}
+                <div class="stds">
+                    <input type="checkbox" id="{{form_type}}" name="formtype_dropdown" value="{{form_type}}">
+                    <label for="formtype_dropdown">{{form_type}}</label><br>
+                </div>
+                {% endfor %}
+            </div>
+
+            <input type="submit" value="SUBMIT" name="submit" id="admin-btn">
+        </form>
+    </div>
+
+
+</body>
+
+</html>

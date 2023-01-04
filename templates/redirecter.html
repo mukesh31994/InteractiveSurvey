@@ -1,0 +1,71 @@
+<html>
+
+<head>
+      <title>REDIRECTER</title>
+      <style>
+            body {
+                  font-family: 'Nunito', sans-serif;
+            }
+
+            #htag {
+                  position: relative;
+                  top: 7%;
+                  left: 43%;
+                  width: 250px;
+                  font-size: 15px;
+                  border-radius: 9px;
+                  letter-spacing: 10px;
+                  background-color: #e7e1e1;
+                  border: 7px solid #e7081a;
+            }
+
+
+            .card {
+                  position: absolute;
+                  width: 600px;
+                  height: 350px;
+                  top: 20%;
+                  left: 37%;
+                  border-radius: 9px;
+                  box-shadow: 16px 16px 16px 16px rgba(0, 0, 0, 0.2);
+                  background-color: #f1c1c1;
+            }
+
+            .card:hover {
+                  border-radius: 9px;
+                  box-shadow: 26px 26px 26px 26px rgba(0, 0, 0, 0.2);
+            }
+
+            .container {
+                  margin: top 60px;
+                  padding: 2px 16px;
+            }
+
+            h1 {
+                  letter-spacing: 5px;
+                  border-radius: 9px;
+                  text-shadow: 2px 2px 5px grey;
+            }
+      </style>
+</head>
+<script>
+      function redirect() {
+            var current_path = location.href.split('/');
+            current_path.pop();
+            var root_path = current_path.join('/');
+            location.href = root_path + "/" + "{{loc}}".replace(/&amp;/g, '&');
+      }
+</script>
+
+<body bgcolor="#ffffff" onload="setTimeout(redirect,3000);">
+      <div class="card">
+            <div class="container">
+                  <h1 align="center">REDIRECTING...</h1>
+                  <h2 align="center"><i>wait for 3 seconds</i></h2>
+                  <h1 align="center">{{content}}</h1>
+            </div>
+      </div>
+
+</body>
+
+</html>
