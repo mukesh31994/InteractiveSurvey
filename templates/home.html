@@ -206,7 +206,7 @@ function drawTable(data) {
   // for (var j = 0; j < Object.keys(data[0]).length; j++) {
   //   head.append($("<th>" + Object.keys(data[0])[j] + "</th>"));
   // }
-  head.append("<th>type</th><th>status</th>");
+  head.append("<th style='text-align: center;'>Type</th><th style='text-align: center;'>Status</th>");
   debugger
   // var user = JSON.parse('{{ students | tojson | safe}}');  
   // Print the content of rows in DataTable
@@ -220,8 +220,8 @@ function drawRow(rowData) {
   var row = $("<tr />")
   $("#DataTable").append(row);
   // row.append($("<td>" + rowData["email"] + "</td>"));
-  row.append($("<td>" + rowData[0] + "</td>"));
-  row.append($("<td>" +( rowData[1] == "1" ? "Incomplete. Click <a href='/feedback?name={{email}}&type=" + rowData[0] + "'>here</a> to Complete" : "Feedback Completed") + "</td>"));
+  row.append($("<td>" + (rowData[0] == '' && rowData[1] == '0' ? "No survey assigned yet" : rowData[0]) + "</td>"));
+  row.append($("<td>" +( rowData[1] == "1" ? "Incomplete. Click <a href='/feedback?name={{email}}&type=" + rowData[0] + "'>here</a> to Complete" :  rowData[1] == "2" ? "Feedback Completed" : "No survey assigned yet") + "</td>"));
 }
 
 </script>
