@@ -216,6 +216,11 @@ def predict():
         return jsonify({'answer': ["Feedback already completed."]})
     if query_count == -1:
         query_count = 0
+        result_from_qdb = question_db_obj.check_database(type=type)
+            questions = {}
+            query_count = -1
+            for idx, ques in enumerate(result_from_qdb):
+                questions[f"Q{idx}"] = (ques, ques.replace(" ", "_"))
         return jsonify({'answer': "Hi there, Type or Say YES if you want to give feedback else NO " + type})
 
     query_text = request.get_json().get("message")
