@@ -237,6 +237,9 @@ def predict():
         return jsonify({'answer': ["Sure, lets have generic conversation."]})
 
     if mode == "FEEDBACK":
+        print("Inside feedback if")
+        print(query_count)
+        print(question_list)
         ques_num = query_count - 1
         if ques_num >= 1:
             responses[f"Q{ques_num}: " +
