@@ -319,9 +319,11 @@ class QuestionDatabase:
             logger.info("Error deleting entry: " + str(e))
 
     def check_database(self, type='', col='*'):
+        print(" inside check_database")
         self.connection = sqlite3.connect(self.db_name,  check_same_thread=False)
         self.cursor = self.connection.cursor() 
         check_string = f"""SELECT {col} FROM {self.table_name}"""
+        print(check_string , type)
         if type != '':
             response = self.cursor.execute(
                 self.check_string, (type,)).fetchall()
@@ -332,9 +334,11 @@ class QuestionDatabase:
             check_string = f"""SELECT id, {col} FROM {self.table_name}"""
             response = self.cursor.execute(check_string).fetchall()
         out = []
+        print(check_string , type)
         for row in response:
             logger.info(row)
             out.append(row[1])
+        print(out)    
         self.connection.close()    
         return out
 
