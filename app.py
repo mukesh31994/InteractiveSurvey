@@ -202,7 +202,7 @@ def predict():
     global query_count, questions, mode, responses, form_completed
     type = request.args.get("type")
     
-    print(query_count)
+    
     print(mode)
     
     print("yo")
@@ -210,32 +210,39 @@ def predict():
     if query_count == -9999:
         form_completed = True
         query_count = -2
+        print(query_count)
 
     if query_count == -2:
         query_count += 1
+        print(query_count)
         return jsonify({'answer': ["Feedback already completed."]})
     if query_count == -1:
         query_count = 0
+        print(query_count)
         return jsonify({'answer': "Hi there, Type or Say YES if you want to give feedback else NO " + type})
 
     query_text = request.get_json().get("message")
     if query_text.lower() == "feedback":
         query_text = "yes"
         query_count = 0
+        print(query_count)
 
     # print(query_text, query_count)
     if form_completed and query_count == 0:
         mode = "CONVERSATION"
         query_count = 1
+        print(query_count)
         return jsonify({'answer': ["Form is already completed, if you want we can have generic conversation, else you can submit the form."]})
 
     if query_text.lower() == "yes" and query_count == 0:
         query_count = 1
         mode = "FEEDBACK"
+        print(query_count)
         return jsonify({'answer': ["Sure, lets start with feedback."]})
     elif query_text.lower() != "yes" and query_count == 0:
         mode = "CONVERSATION"
         query_count = 1
+        print(query_count)
         return jsonify({'answer': ["Sure, lets have generic conversation."]})
 
     if mode == "FEEDBACK":
@@ -247,7 +254,7 @@ def predict():
         for idx, ques in enumerate(result_from_qdb):
             questions[f"Q{idx}"] = (ques, ques.replace(" ", "_"))
         question_list = list(questions.values())
-        print(query_count)
+        
         print(question_list)
         ques_num = query_count - 1
         if ques_num >= 1:
@@ -257,16 +264,19 @@ def predict():
         if ques_num >= len(question_list):
             query_count = -9999
             print(responses)
+            print(query_count)
             return jsonify({'answer': ["Thank you for your feedback. Please press SUBMIT to complete the feedback."]})
 
         ques = question_list[query_count-1][0]
         query_count += 1
+        print(query_count)
         return jsonify({'answer': [f"Ques {ques_num+1}/{len(question_list)}: {ques}"]})
     else:
         # TODO: text validation
         response_from_bot = bot.get_response(query_text)
         response = {"answer": response_from_bot}
         query_count += 1
+        print(query_count)
         return jsonify(response)
 
 
