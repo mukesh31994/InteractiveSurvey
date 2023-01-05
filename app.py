@@ -240,8 +240,8 @@ def predict():
 
     if mode == "FEEDBACK":
         print("Inside feedback if")
-        
-        result_from_qdb = question_db_obj.check_database(type=type)
+        print(request.args.get("type"))
+        result_from_qdb = question_db_obj.check_database(type=request.args.get("type"))
         questions = {}
         query_count = -1
         for idx, ques in enumerate(result_from_qdb):
