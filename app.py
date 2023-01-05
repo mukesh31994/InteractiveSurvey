@@ -204,7 +204,7 @@ def predict():
     question_list = list(questions.values())
     print(query_count)
     print(mode)
-    print(form_completed)
+    print(question_list)
     if query_count == -9999:
         form_completed = True
         query_count = -2
