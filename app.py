@@ -218,7 +218,8 @@ def predict():
         return jsonify({'answer': ["Feedback already completed."]})
     if query_count == -1:
         query_count = 0
-        print(query_count)
+        type = request.args.get("type")
+        print(query_count, type)
         return jsonify({'answer': "Hi there, Type or Say YES if you want to give feedback else NO " + type})
 
     query_text = request.get_json().get("message")
