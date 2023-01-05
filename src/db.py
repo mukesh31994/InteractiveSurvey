@@ -143,8 +143,8 @@ class StudentDatabase:
         self.cursor = self.connection.cursor() 
         response = self.cursor.execute(
             self.query_string, (name, type)).fetchone()
-        logger.info("Validation successful for username: " + str(name))
-        logger.info(response)
+        print("Validation successful for username: " + str(name))
+        print(response)
         self.connection.close()
         # return True if response else False
         if response:
